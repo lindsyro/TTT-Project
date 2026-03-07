@@ -11,4 +11,16 @@
   <body>
     <div id="app"></div>
   </body>
+  <script type="text/javascript">
+  (function(l) {
+    if (l.search[1] === 'p') {
+      var decoded = l.search.slice(1).split('&').map(function(s) { 
+        return s.replace(/~and~/g, '&') 
+      }).filter(function(v) { return v.indexOf('p=') === 0; })[0].slice(2);
+      if (decoded !== l.pathname.slice(1)) {
+        window.history.replaceState(null, null, l.pathname.slice(0, 1) + decoded + l.search.slice(1));
+      }
+    }
+  }(window.location))
+</script>
 </html>
